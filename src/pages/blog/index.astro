@@ -22,37 +22,12 @@ const featuredPost = await getFeaturedPost();
 const tags = featuredPost.metadata.tags;
 ---
 
-<Layout title="Blog">
-  <h1 class="text-4xl font-bold">Blog Posts</h1>
-  <div class="my-6"></div>
-  <section class="bg-white rounded-md">
-    <a
-      href={`blog/${featuredPost.slug}`}
-      class="hover:opacity-80 transition-opacity"
-    >
-      <Image
-        src={featuredPost.metadata.cover_image.imgix_url}
-        format="webp"
-        width={1200}
-        aspectRatio={16 / 9}
-        alt="Featured Blog Post"
-        class={"rounded-t-md"}
-        loading="eager"
-      />
-      <div
-        class="flex flex-col gap-y-2 bg-white h-fit p-6 rounded-b-md shadow-md"
-      >
-        <h2 class="text-3xl font-semibold">{featuredPost.title}</h2>
-        <p class="text-lg">{featuredPost.metadata.excerpt}</p>
-      </div>
-    </a>
-  </section>
-  <div class="my-6"></div>
-  <ul class="grid md:grid-cols-2 gap-8">
-    {
-      data
-        .filter((post: Post) => post.title !== featuredPost.title)
-        .map((post: Post) => (
+<Layout title="blog - slow heal">
+  <section class="flex flex-col items-center">
+    <h1 class="text-2xl text-gray-600">all blog posts</h1>
+    <ul class="w-3/4 mx-auto">
+      {
+        data.map((post: Post) => (
           <Card
             title={post.title}
             href={post.slug}
@@ -60,6 +35,7 @@ const tags = featuredPost.metadata.tags;
             date={post.created_at}
           />
         ))
-    }
-  </ul>
+      }
+    </ul>
+  </section>
 </Layout>
