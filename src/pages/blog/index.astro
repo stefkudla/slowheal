@@ -14,6 +14,7 @@ export interface Post {
       title: string;
     }[];
   };
+  created_at: string;
 }
 
 const data = await getAllPosts();
@@ -43,17 +44,6 @@ const tags = featuredPost.metadata.tags;
       >
         <h2 class="text-3xl font-semibold">{featuredPost.title}</h2>
         <p class="text-lg">{featuredPost.metadata.excerpt}</p>
-        {
-          tags && (
-            <div class="flex flex-wrap gap-1">
-              {tags?.map((tag: { title: string }) => (
-                <span class="bg-zinc-100 border px-2 text-sm text-zinc-700 font-bold rounded-md transition shadow w-fit whitespace-nowrap">
-                  {tag.title}
-                </span>
-              ))}
-            </div>
-          )
-        }
       </div>
     </a>
   </section>
@@ -67,7 +57,7 @@ const tags = featuredPost.metadata.tags;
             title={post.title}
             href={post.slug}
             body={post.metadata.excerpt}
-            tags={post.metadata.tags.map((tag) => tag.title)}
+            date={post.created_at}
           />
         ))
     }

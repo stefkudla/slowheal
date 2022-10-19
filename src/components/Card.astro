@@ -1,34 +1,26 @@
 ---
+import { parseISO, format } from "date-fns";
 export interface Props {
   title: string;
   body: string;
   href: string;
-  tags: string[];
+  date: string;
 }
 
-const { href, title, body, tags } = Astro.props;
+const { href, title, body, date } = Astro.props;
 ---
 
-<li class="bg-white rounded-md shadow-md hover:shadow-xl transition">
-  <a href={`/blog/${href}`}>
-    <div class="flex flex-col h-full gap-y-2 p-6">
-      <h2 class="font-semibold text-xl pr-4 pt-2">
+<li
+  class="my-8 border-b border-emerald-100 hover:opacity-60 transition-opacity"
+>
+  <a class="my-4" href={`/blog/${href}`}>
+    <span class="flex justify-between items-center py-4"
+      ><h2 class="text-lg pr-4">
         {title}
       </h2>
-      <p>
-        {body}
-      </p>
-      {
-        tags && (
-          <div class="flex flex-wrap gap-1">
-            {tags?.map((tag) => (
-              <span class="bg-zinc-100 border px-2 text-sm text-zinc-700 font-bold rounded-md transition shadow w-fit whitespace-nowrap">
-                {tag}
-              </span>
-            ))}
-          </div>
-        )
-      }
-    </div>
+      <span class="text-md text-gray-500"
+        >{format(parseISO(date), "M/d/yy")}</span
+      >
+    </span>
   </a>
 </li>
